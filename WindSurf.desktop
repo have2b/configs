@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=WindSurf
+Exec="/home/tlongizdabezt/AppImages/Windsurf/windsurf" %u
+Version=1.0
+Type=Application
+Categories=Development;Editor;
+Terminal=false
+Icon=/home/tlongizdabezt/AppImages/Windsurf/windsurf-logo.svg
+Comment=WindSurf Editor for tlongdepzaivcl
+StartupNotify=true
