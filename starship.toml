@@ -41,11 +41,12 @@ c_shadow = '#242933'
 
 [os]
 disabled = false
-style = "bg:c_gold fg:c_ocean"
+format = "[$symbol]($style)"
 
 [os.symbols]
-Fedora = ""
-NixOS = ""
+Ubuntu = "[](fg:c_sunset bg:c_gold)"
+Fedora = "[](fg:c_ocean bg:c_gold)"
+NixOS = "[](fg:c_frost bg:c_gold)"
 
 [username]
 show_always = true
