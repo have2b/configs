@@ -29,6 +29,7 @@ zinit light MichaelAquilina/zsh-you-should-use
 zinit snippet OMZP::sudo
 zinit snippet OMZP::command-not-found
 zinit snippet OMZP::git
+# zinit snippet OMZP::rust
 
 # Load completions
 autoload -Uz compinit && compinit
@@ -61,12 +62,19 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'exa $realpath'
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa $realpath'
 
 # Aliases
+alias ff='fastfetch'
 alias ls='exa'
 alias ll='exa -alF'
 alias la='exa -A'
 alias c='clear'
 alias lzd='lazydocker'
 alias lzg='lazygit'
+alias update='sudo dnf update'
+# For Cargo
+alias cgb='cargo build'
+alias cgr='cargo run'
+alias cgc='cargo check'
+alias cgbr='cargo build --release'
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

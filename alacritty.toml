@@ -2,10 +2,10 @@
 live_config_reload = true
 
 [window]
-padding = { x = 16, y = 16 }
+padding = { x = 16, y = 0 }
 dynamic_padding = true
 decorations = "None"
-opacity = 0.75
+opacity = 0.72
 startup_mode = "Maximized"
 
 [font]
