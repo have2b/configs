@@ -1,4 +1,4 @@
-# These config requires git, exa, nvm, bun, fzf, zoxide, lazydocker and lazygit
+# These config requires git, eza, nvm, bun, fzf, zoxide, lazydocker and lazygit
 # Install before using this config
 # Zinit home directory where we will store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -40,6 +40,12 @@ zinit cdreplay -q
 bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
+bindkey '^[[A' history-beginning-search-backward
+bindkey '^[[B' history-beginning-search-forward
+bindkey "^[[H" beginning-of-line    # Home
+bindkey "^[[F" end-of-line         # End
+bindkey "^[[1;5C" forward-word     # Ctrl + Right
+bindkey "^[[1;5D" backward-word    # Ctrl + Left
 
 # History for zsh and tmux
 HISTSIZE=5000
@@ -70,6 +76,9 @@ alias c='clear'
 alias lzd='lazydocker'
 alias lzg='lazygit'
 alias update='sudo dnf update'
+alias warpc='warp-cli connect'
+alias warpdc='warp-cli disconnect'
+
 # For Cargo
 alias cgb='cargo build'
 alias cgr='cargo run'
