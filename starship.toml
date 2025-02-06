@@ -47,6 +47,7 @@ format = "[$symbol]($style)"
 Ubuntu = "[](fg:c_sunset bg:c_gold)"
 Fedora = "[](fg:c_ocean bg:c_gold)"
 NixOS = "[](fg:c_frost bg:c_gold)"
+Arch = "[](fg:c_ocean bg:c_gold)"
 
 [username]
 show_always = true
