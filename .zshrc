@@ -29,7 +29,6 @@ zinit light MichaelAquilina/zsh-you-should-use
 zinit snippet OMZP::sudo
 zinit snippet OMZP::command-not-found
 zinit snippet OMZP::git
-# zinit snippet OMZP::rust
 
 # Load completions
 autoload -Uz compinit && compinit
@@ -79,11 +78,12 @@ alias update='sudo dnf update'
 alias warpc='warp-cli connect'
 alias warpdc='warp-cli disconnect'
 
-# For Cargo
-alias cgb='cargo build'
-alias cgr='cargo run'
-alias cgc='cargo check'
-alias cgbr='cargo build --release'
+# For terraform
+alias tfp='terraform plan'
+alias tfb='terraform build'
+alias tfa='terraform apply'
+alias tfi='terraform init'
+alias tfd='terraform destroy'
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -99,3 +99,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/terraform terraform
