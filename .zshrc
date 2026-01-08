@@ -30,10 +30,8 @@ zinit snippet OMZP::sudo
 zinit snippet OMZP::command-not-found
 zinit snippet OMZP::git
 
-# Load completions
+# Load completions FIRST - This should come before any completion-related settings
 autoload -Uz compinit && compinit
-
-zinit cdreplay -q
 
 # Keybindings
 bindkey -e
@@ -45,6 +43,7 @@ bindkey "^[[H" beginning-of-line    # Home
 bindkey "^[[F" end-of-line         # End
 bindkey "^[[1;5C" forward-word     # Ctrl + Right
 bindkey "^[[1;5D" backward-word    # Ctrl + Left
+bindkey '^I' fzf-tab-complete  # Make sure Tab is bound to fzf-tab
 
 # History for zsh and tmux
 HISTSIZE=5000
@@ -59,18 +58,34 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
-# Completion styling
+# Completion styling - FIXED: Removed 'menu no' which disables menu completion
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'exa $realpath'
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa $realpath'
+zstyle ':completion:*' menu select  # Changed from 'no' to 'select' for menu completion
+
+# fzf-tab configuration
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# set descriptions format to enable group support
+zstyle ':completion:*:descriptions' format '[%d]'
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# preview directory's content with eza when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+# switch group using `,` and `.`
+zstyle ':fzf-tab:*' switch-group ',' '.'
+# fzf-tab default options
+zstyle ':fzf-tab:*' fzf-command fzf
+zstyle ':fzf-tab:*' fzf-flags --height=40% --border --preview-window=right:60%
+
+# Export eza because it is no longer supported
+export PATH="$HOME/.cargo/bin:$PATH"
 
 # Aliases
 alias ff='fastfetch'
-alias ls='exa'
-alias ll='exa -alF'
-alias la='exa -A'
+alias ls='eza'
+alias ll='eza -alF'
+alias la='eza -A'
 alias c='clear'
 alias lzd='lazydocker'
 alias lzg='lazygit'
@@ -96,9 +111,14 @@ export NVM_DIR="$HOME/.nvm"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-# Shell integrations
-eval "$(fzf --zsh)"
+# Shell integrations - MOVE these BEFORE fzf-tab initialization
 eval "$(zoxide init zsh)"
+eval "$(fzf --zsh)"
+
+# IMPORTANT: fzf-tab must be initialized last or it may conflict
+# Remove zinit cdreplay if you're having issues
+# zinit cdreplay -q
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform
+
